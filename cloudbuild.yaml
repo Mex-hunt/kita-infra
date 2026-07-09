@@ -62,3 +62,4 @@ steps:
           exit 0
         fi
         terraform apply -input=false -auto-approve /workspace/cloudkite.tfplan
+
