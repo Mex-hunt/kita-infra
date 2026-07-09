@@ -1,7 +1,7 @@
 substitutions:
   _TERRAFORM_VERSION: 1.9.8
   _STATE_BUCKET: kita-infra
-  _APPLY: "false"
+  _APPLY: "true"
 
 options:
   logging: CLOUD_LOGGING_ONLY
