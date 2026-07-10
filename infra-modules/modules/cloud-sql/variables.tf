@@ -38,6 +38,16 @@ variable "tier" {
   type        = string
 }
 
+variable "edition" {
+  description = "Cloud SQL edition."
+  type        = string
+
+  validation {
+    condition     = contains(["ENTERPRISE", "ENTERPRISE_PLUS"], var.edition)
+    error_message = "edition must be ENTERPRISE or ENTERPRISE_PLUS."
+  }
+}
+
 variable "availability_type" {
   description = "ZONAL or REGIONAL availability."
   type        = string
@@ -49,8 +59,18 @@ variable "availability_type" {
 }
 
 variable "disk_size_gb" {
-  description = "Initial SSD disk size."
+  description = "Initial disk size in GB."
   type        = number
+}
+
+variable "disk_type" {
+  description = "Cloud SQL disk type."
+  type        = string
+
+  validation {
+    condition     = contains(["PD_HDD", "PD_SSD"], var.disk_type)
+    error_message = "disk_type must be PD_HDD or PD_SSD."
+  }
 }
 
 variable "deletion_protection" {
