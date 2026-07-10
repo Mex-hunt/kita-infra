@@ -92,8 +92,10 @@ module "cloud_sql" {
   database_user                       = var.cloud_sql_database_user
   database_version                    = var.cloud_sql_database_version
   tier                                = var.cloud_sql_tier
+  edition                             = var.cloud_sql_edition
   availability_type                   = var.cloud_sql_availability_type
   disk_size_gb                        = var.cloud_sql_disk_size_gb
+  disk_type                           = var.cloud_sql_disk_type
   deletion_protection                 = var.cloud_sql_deletion_protection
   private_service_range_prefix_length = var.private_service_range_prefix_length
   credentials_secret_id               = var.database_credentials_secret_id

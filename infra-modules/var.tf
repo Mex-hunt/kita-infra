@@ -157,7 +157,13 @@ variable "cloud_sql_database_version" {
 variable "cloud_sql_tier" {
   description = "Cloud SQL machine tier."
   type        = string
-  default     = "db-custom-1-3840"
+  default     = "db-f1-micro"
+}
+
+variable "cloud_sql_edition" {
+  description = "Cloud SQL edition. ENTERPRISE keeps demo resources moderate; ENTERPRISE_PLUS requires db-perf-optimized tiers."
+  type        = string
+  default     = "ENTERPRISE"
 }
 
 variable "cloud_sql_availability_type" {
@@ -167,9 +173,15 @@ variable "cloud_sql_availability_type" {
 }
 
 variable "cloud_sql_disk_size_gb" {
-  description = "Initial Cloud SQL SSD disk size."
+  description = "Initial Cloud SQL disk size."
   type        = number
   default     = 10
+}
+
+variable "cloud_sql_disk_type" {
+  description = "Cloud SQL disk type."
+  type        = string
+  default     = "PD_HDD"
 }
 
 variable "cloud_sql_deletion_protection" {

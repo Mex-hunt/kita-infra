@@ -12,8 +12,10 @@ dockerhub_token_secret_id         = "cloudkite-dockerhub-token"
 cloud_sql_instance_name        = "cloudkite-postgres"
 cloud_sql_database_name        = "cloudkite"
 cloud_sql_database_user        = "cloudkite_app"
-cloud_sql_tier                 = "db-custom-1-3840"
+cloud_sql_tier                 = "db-f1-micro"
+cloud_sql_edition              = "ENTERPRISE"
 cloud_sql_availability_type    = "ZONAL"
+cloud_sql_disk_type            = "PD_HDD"
 cloud_sql_deletion_protection  = true
 database_credentials_secret_id = "cloudkite-database-credentials"
 
