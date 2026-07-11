@@ -1,7 +1,8 @@
 # Cloudkite infrastructure
 
-The main stack provisions project APIs, IAM, Artifact Registry, networking,
-GKE, Cloud SQL, Cloud DNS, and optional Cloud Build triggers.
+The main stack provisions project APIs, IAM, networking, GKE, Cloud SQL,
+Cloud DNS, and optional Cloud Build triggers. Application images are built and
+pushed to Docker Hub by the application pipeline.
 
 ## Bootstrap
 

@@ -23,11 +23,9 @@ workload_identity_service_account       = "cloudkite-backend"
 cert_manager_namespace                  = "cert-manager"
 cert_manager_kubernetes_service_account = "cert-manager"
 
-artifact_repository_name  = "cloudkite"
 dockerhub_token_secret_id = "cloudkite-dockerhub-token"
 
 required_services = [
-  "artifactregistry.googleapis.com",
   "cloudbuild.googleapis.com",
   "compute.googleapis.com",
   "container.googleapis.com",
