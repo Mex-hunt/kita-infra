@@ -3,13 +3,28 @@ variable "project_id" {
   type        = string
 }
 
+variable "region" {
+  description = "GCP region for the internal ingress IP."
+  type        = string
+}
+
 variable "static_ip_name" {
-  description = "Name of the global IP reserved for the GKE ingress."
+  description = "Name of the regional internal IP reserved for the GKE ingress."
+  type        = string
+}
+
+variable "network_id" {
+  description = "VPC network ID that can resolve the private DNS zone."
+  type        = string
+}
+
+variable "subnetwork_id" {
+  description = "Subnet ID used to reserve the internal ingress IP."
   type        = string
 }
 
 variable "enable_dns" {
-  description = "Create a Cloud DNS managed zone and application record."
+  description = "Create a private Cloud DNS managed zone and application record."
   type        = bool
 }
 
@@ -19,7 +34,7 @@ variable "dns_zone_name" {
 }
 
 variable "domain_name" {
-  description = "Apex domain managed by Cloud DNS, without a trailing dot."
+  description = "Private DNS suffix managed by Cloud DNS, without a trailing dot."
   type        = string
 }
 

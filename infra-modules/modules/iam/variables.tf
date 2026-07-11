@@ -22,3 +22,8 @@ variable "workload_service_account_name" {
   description = "Account ID for the backend workload service account."
   type        = string
 }
+
+variable "cert_manager_service_account_name" {
+  description = "Account ID for the cert-manager Google service account."
+  type        = string
+}

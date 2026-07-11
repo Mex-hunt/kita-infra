@@ -16,6 +16,10 @@ locals {
       account_id   = var.workload_service_account_name
       display_name = "Cloudkite backend workload service account"
     }
+    cert_manager = {
+      account_id   = var.cert_manager_service_account_name
+      display_name = "Cloudkite cert-manager Google CAS service account"
+    }
   }
 
   role_bindings = {
@@ -74,6 +78,10 @@ locals {
     "backend-cloudsql-client" = {
       service_account = "backend_workload"
       role            = "roles/cloudsql.client"
+    }
+    "cert-manager-ca-requester" = {
+      service_account = "cert_manager"
+      role            = "roles/privateca.certificateRequester"
     }
   }
 }
