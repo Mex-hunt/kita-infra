@@ -28,11 +28,6 @@ variable "repository_name" {
   type        = string
 }
 
-variable "artifact_repository_name" {
-  description = "Artifact Registry repository name."
-  type        = string
-}
-
 variable "terraform_state_bucket_name" {
   description = "GCS bucket containing the main Terraform state."
   type        = string

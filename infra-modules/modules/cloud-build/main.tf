@@ -72,9 +72,8 @@ resource "google_cloudbuild_trigger" "feature" {
   }
 
   substitutions = {
-    _DEPLOY              = "false"
-    _REGION              = var.region
-    _ARTIFACT_REPOSITORY = var.artifact_repository_name
+    _DEPLOY = "false"
+    _REGION = var.region
   }
 }
 
@@ -95,8 +94,7 @@ resource "google_cloudbuild_trigger" "main" {
   }
 
   substitutions = {
-    _DEPLOY              = "true"
-    _REGION              = var.region
-    _ARTIFACT_REPOSITORY = var.artifact_repository_name
+    _DEPLOY = "true"
+    _REGION = var.region
   }
 }

@@ -108,11 +108,6 @@ variable "cert_manager_kubernetes_service_account" {
   type        = string
 }
 
-variable "artifact_repository_name" {
-  description = "Docker Artifact Registry repository name."
-  type        = string
-}
-
 variable "dockerhub_token_secret_id" {
   description = "Secret Manager ID containing the Docker Hub access token."
   type        = string

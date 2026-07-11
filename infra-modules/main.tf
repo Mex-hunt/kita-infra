@@ -3,10 +3,8 @@ data "google_client_config" "default" {}
 module "foundation" {
   source = "./modules/foundation"
 
-  project_id               = var.project_id
-  region                   = var.region
-  artifact_repository_name = var.artifact_repository_name
-  services                 = var.required_services
+  project_id = var.project_id
+  services   = var.required_services
 }
 
 module "iam" {
@@ -141,7 +139,6 @@ module "cloud_build" {
   terraform_service_account_email = module.iam.terraform_service_account_email
   repository_owner                = var.github_repository_owner
   repository_name                 = var.github_repository_name
-  artifact_repository_name        = var.artifact_repository_name
   terraform_state_bucket_name     = var.terraform_state_bucket_name
 
   depends_on = [module.foundation, module.iam]

@@ -23,10 +23,6 @@ locals {
   }
 
   role_bindings = {
-    "gke-nodes-artifact-reader" = {
-      service_account = "gke_nodes"
-      role            = "roles/artifactregistry.reader"
-    }
     "gke-nodes-log-writer" = {
       service_account = "gke_nodes"
       role            = "roles/logging.logWriter"
@@ -38,10 +34,6 @@ locals {
     "gke-nodes-monitoring-viewer" = {
       service_account = "gke_nodes"
       role            = "roles/monitoring.viewer"
-    }
-    "cloud-build-artifact-writer" = {
-      service_account = "cloud_build"
-      role            = "roles/artifactregistry.writer"
     }
     "cloud-build-gke-developer" = {
       service_account = "cloud_build"

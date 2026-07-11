@@ -49,11 +49,6 @@ output "cert_manager_service_account_email" {
   value       = module.iam.cert_manager_service_account_email
 }
 
-output "artifact_repository_url" {
-  description = "Base URL used to tag application images."
-  value       = module.foundation.artifact_repository_url
-}
-
 output "dockerhub_token_secret_id" {
   description = "Secret Manager ID awaiting the Docker Hub token version."
   value       = google_secret_manager_secret.dockerhub_token.secret_id
