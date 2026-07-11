@@ -1,16 +1,16 @@
 output "static_ip_name" {
-  description = "Global static IP resource name."
-  value       = google_compute_global_address.ingress.name
+  description = "Regional internal static IP resource name."
+  value       = google_compute_address.internal_ingress.name
 }
 
 output "static_ip_address" {
-  description = "Global static IPv4 address."
-  value       = google_compute_global_address.ingress.address
+  description = "Regional internal IPv4 address."
+  value       = google_compute_address.internal_ingress.address
 }
 
-output "dns_name_servers" {
-  description = "Name servers to configure at the domain registrar."
-  value       = var.enable_dns ? google_dns_managed_zone.application[0].name_servers : []
+output "dns_zone_name" {
+  description = "Private Cloud DNS managed zone name."
+  value       = var.enable_dns ? google_dns_managed_zone.application[0].name : null
 }
 
 output "application_hostname" {

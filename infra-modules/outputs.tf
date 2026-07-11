@@ -8,6 +8,11 @@ output "subnet_name" {
   value       = google_compute_subnetwork.gke.name
 }
 
+output "proxy_only_subnet_name" {
+  description = "Proxy-only subnet used by regional internal HTTP(S) load balancers."
+  value       = google_compute_subnetwork.proxy_only.name
+}
+
 output "cluster_name" {
   description = "GKE cluster name."
   value       = module.gke.name
@@ -39,6 +44,11 @@ output "backend_workload_service_account_email" {
   value       = module.iam.backend_workload_service_account_email
 }
 
+output "cert_manager_service_account_email" {
+  description = "Cert-manager Google service account email for Google CA Service issuance."
+  value       = module.iam.cert_manager_service_account_email
+}
+
 output "artifact_repository_url" {
   description = "Base URL used to tag application images."
   value       = module.foundation.artifact_repository_url
@@ -65,18 +75,18 @@ output "database_credentials_secret_id" {
 }
 
 output "ingress_static_ip_name" {
-  description = "Global static IP resource name for Helm ingress values."
+  description = "Regional internal static IP resource name for Helm ingress values."
   value       = module.edge.static_ip_name
 }
 
 output "ingress_static_ip_address" {
-  description = "Global static IPv4 address for the application."
+  description = "Regional internal IPv4 address for the application."
   value       = module.edge.static_ip_address
 }
 
-output "dns_name_servers" {
-  description = "Cloud DNS name servers to configure at the registrar."
-  value       = module.edge.dns_name_servers
+output "private_dns_zone_name" {
+  description = "Private Cloud DNS managed zone name."
+  value       = module.edge.dns_zone_name
 }
 
 output "application_hostname" {

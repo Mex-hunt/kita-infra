@@ -1,8 +1,10 @@
-resource "google_compute_global_address" "ingress" {
+resource "google_compute_address" "internal_ingress" {
   project      = var.project_id
   name         = var.static_ip_name
-  address_type = "EXTERNAL"
-  ip_version   = "IPV4"
+  region       = var.region
+  address_type = "INTERNAL"
+  purpose      = "SHARED_LOADBALANCER_VIP"
+  subnetwork   = var.subnetwork_id
 }
 
 resource "google_dns_managed_zone" "application" {
@@ -11,10 +13,13 @@ resource "google_dns_managed_zone" "application" {
   project     = var.project_id
   name        = var.dns_zone_name
   dns_name    = "${trimsuffix(var.domain_name, ".")}."
-  description = "Public DNS zone for the Cloudkite application"
+  description = "Private DNS zone for the Cloudkite application"
+  visibility  = "private"
 
-  dnssec_config {
-    state = "on"
+  private_visibility_config {
+    networks {
+      network_url = var.network_id
+    }
   }
 
   lifecycle {
@@ -33,5 +38,5 @@ resource "google_dns_record_set" "application" {
   name         = "${trimsuffix(var.application_hostname, ".")}."
   type         = "A"
   ttl          = 300
-  rrdatas      = [google_compute_global_address.ingress.address]
+  rrdatas      = [google_compute_address.internal_ingress.address]
 }

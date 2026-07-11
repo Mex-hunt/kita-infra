@@ -12,11 +12,12 @@ module "foundation" {
 module "iam" {
   source = "./modules/iam"
 
-  project_id                       = var.project_id
-  node_service_account_name        = var.node_service_account_name
-  cloud_build_service_account_name = var.cloud_build_service_account_name
-  terraform_service_account_name   = var.terraform_service_account_name
-  workload_service_account_name    = var.workload_service_account_name
+  project_id                        = var.project_id
+  node_service_account_name         = var.node_service_account_name
+  cloud_build_service_account_name  = var.cloud_build_service_account_name
+  terraform_service_account_name    = var.terraform_service_account_name
+  workload_service_account_name     = var.workload_service_account_name
+  cert_manager_service_account_name = var.cert_manager_service_account_name
 
   depends_on = [module.foundation]
 }
@@ -65,6 +66,16 @@ resource "google_compute_subnetwork" "gke" {
   }
 }
 
+resource "google_compute_subnetwork" "proxy_only" {
+  project       = var.project_id
+  name          = var.proxy_only_subnet_name
+  region        = var.region
+  network       = google_compute_network.main.id
+  ip_cidr_range = var.proxy_only_subnet_cidr
+  purpose       = "REGIONAL_MANAGED_PROXY"
+  role          = "ACTIVE"
+}
+
 resource "google_compute_router" "main" {
   project = var.project_id
   name    = "${var.network_name}-router"
@@ -108,7 +119,10 @@ module "edge" {
   source = "./modules/edge"
 
   project_id           = var.project_id
+  region               = var.region
   static_ip_name       = var.ingress_static_ip_name
+  network_id           = google_compute_network.main.id
+  subnetwork_id        = google_compute_subnetwork.gke.id
   enable_dns           = var.enable_dns
   dns_zone_name        = var.dns_zone_name
   domain_name          = var.domain_name
@@ -214,6 +228,14 @@ resource "google_service_account_iam_member" "backend_workload_identity" {
   service_account_id = "projects/${var.project_id}/serviceAccounts/${module.iam.backend_workload_service_account_email}"
   role               = "roles/iam.workloadIdentityUser"
   member             = "serviceAccount:${var.project_id}.svc.id.goog[${var.workload_identity_namespace}/${var.workload_identity_service_account}]"
+
+  depends_on = [module.gke]
+}
+
+resource "google_service_account_iam_member" "cert_manager_workload_identity" {
+  service_account_id = "projects/${var.project_id}/serviceAccounts/${module.iam.cert_manager_service_account_email}"
+  role               = "roles/iam.workloadIdentityUser"
+  member             = "serviceAccount:${var.project_id}.svc.id.goog[${var.cert_manager_namespace}/${var.cert_manager_kubernetes_service_account}]"
 
   depends_on = [module.gke]
 }
