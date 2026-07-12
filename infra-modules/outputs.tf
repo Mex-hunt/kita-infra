@@ -49,6 +49,16 @@ output "cert_manager_service_account_email" {
   value       = module.iam.cert_manager_service_account_email
 }
 
+output "cas_ca_pool_name" {
+  description = "Private CA Service pool name used by google-cas-issuer."
+  value       = google_privateca_ca_pool.cloudkite.name
+}
+
+output "cas_certificate_authority_name" {
+  description = "Private certificate authority name."
+  value       = google_privateca_certificate_authority.cloudkite.name
+}
+
 output "dockerhub_token_secret_id" {
   description = "Secret Manager ID awaiting the Docker Hub token version."
   value       = google_secret_manager_secret.dockerhub_token.secret_id

@@ -12,16 +12,17 @@ services_cidr          = "10.30.0.0/20"
 proxy_only_subnet_name = "cloudkite-proxy-only-subnet"
 proxy_only_subnet_cidr = "10.40.0.0/23"
 
-cluster_name                            = "cloudkite-gke"
-node_service_account_name               = "cloudkite-gke-nodes"
-cloud_build_service_account_name        = "cloudkite-cloud-build"
-terraform_service_account_name          = "cloudkite-terraform"
-workload_service_account_name           = "cloudkite-backend"
-cert_manager_service_account_name       = "cloudkite-cert-manager"
-workload_identity_namespace             = "cloudkite"
-workload_identity_service_account       = "cloudkite-backend"
-cert_manager_namespace                  = "cert-manager"
-cert_manager_kubernetes_service_account = "cert-manager"
+cluster_name                                 = "cloudkite-gke"
+node_service_account_name                    = "cloudkite-gke-nodes"
+cloud_build_service_account_name             = "cloudkite-cloud-build"
+terraform_service_account_name               = "cloudkite-terraform"
+workload_service_account_name                = "cloudkite-backend"
+cert_manager_service_account_name            = "cloudkite-cert-manager"
+workload_identity_namespace                  = "cloudkite"
+workload_identity_service_account            = "cloudkite-backend"
+cert_manager_namespace                       = "cert-manager"
+cert_manager_kubernetes_service_account      = "cert-manager"
+google_cas_issuer_kubernetes_service_account = "cert-manager-google-cas-issuer"
 
 dockerhub_token_secret_id = "cloudkite-dockerhub-token"
 
@@ -39,6 +40,12 @@ required_services = [
   "servicenetworking.googleapis.com",
   "sqladmin.googleapis.com",
 ]
+
+cas_ca_pool_id               = "cloudkite-ca-pool"
+cas_certificate_authority_id = "cloudkite-private-ca"
+cas_ca_pool_tier             = "DEVOPS"
+cas_certificate_lifetime     = "315360000s"
+cas_deletion_protection      = false
 
 cloud_sql_instance_name             = "cloudkite-postgres"
 cloud_sql_database_name             = "cloudkite"

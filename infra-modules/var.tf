@@ -108,6 +108,11 @@ variable "cert_manager_kubernetes_service_account" {
   type        = string
 }
 
+variable "google_cas_issuer_kubernetes_service_account" {
+  description = "Kubernetes service account used by google-cas-issuer."
+  type        = string
+}
+
 variable "dockerhub_token_secret_id" {
   description = "Secret Manager ID containing the Docker Hub access token."
   type        = string
@@ -116,6 +121,31 @@ variable "dockerhub_token_secret_id" {
 variable "required_services" {
   description = "GCP APIs required by the platform."
   type        = set(string)
+}
+
+variable "cas_ca_pool_id" {
+  description = "Private CA Service pool ID used by google-cas-issuer."
+  type        = string
+}
+
+variable "cas_certificate_authority_id" {
+  description = "Private CA Service certificate authority ID."
+  type        = string
+}
+
+variable "cas_ca_pool_tier" {
+  description = "Private CA Service pool tier."
+  type        = string
+}
+
+variable "cas_certificate_lifetime" {
+  description = "Lifetime for the private certificate authority."
+  type        = string
+}
+
+variable "cas_deletion_protection" {
+  description = "Protect the private certificate authority from accidental deletion."
+  type        = bool
 }
 
 variable "cloud_sql_instance_name" {
