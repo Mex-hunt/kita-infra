@@ -17,8 +17,3 @@ output "backend_workload_service_account_email" {
   description = "Backend workload service account email."
   value       = google_service_account.this["backend_workload"].email
 }
-
-output "cert_manager_service_account_email" {
-  description = "Cert-manager Google service account email."
-  value       = google_service_account.this["cert_manager"].email
-}
