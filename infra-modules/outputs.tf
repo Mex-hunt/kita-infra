@@ -8,11 +8,6 @@ output "subnet_name" {
   value       = google_compute_subnetwork.gke.name
 }
 
-output "proxy_only_subnet_name" {
-  description = "Proxy-only subnet used by regional internal HTTP(S) load balancers."
-  value       = google_compute_subnetwork.proxy_only.name
-}
-
 output "cluster_name" {
   description = "GKE cluster name."
   value       = module.gke.name
@@ -44,21 +39,6 @@ output "backend_workload_service_account_email" {
   value       = module.iam.backend_workload_service_account_email
 }
 
-output "cert_manager_service_account_email" {
-  description = "Cert-manager Google service account email for Google CA Service issuance."
-  value       = module.iam.cert_manager_service_account_email
-}
-
-output "cas_ca_pool_name" {
-  description = "Private CA Service pool name used by google-cas-issuer."
-  value       = google_privateca_ca_pool.cloudkite.name
-}
-
-output "cas_certificate_authority_name" {
-  description = "Private certificate authority name."
-  value       = google_privateca_certificate_authority.cloudkite.name
-}
-
 output "dockerhub_token_secret_id" {
   description = "Secret Manager ID awaiting the Docker Hub token version."
   value       = google_secret_manager_secret.dockerhub_token.secret_id
@@ -80,22 +60,17 @@ output "database_credentials_secret_id" {
 }
 
 output "ingress_static_ip_name" {
-  description = "Regional internal static IP resource name for Helm ingress values."
+  description = "Global external static IP resource name for Helm ingress values."
   value       = module.edge.static_ip_name
 }
 
 output "ingress_static_ip_address" {
-  description = "Regional internal IPv4 address for the application."
+  description = "Global external IPv4 address for DuckDNS."
   value       = module.edge.static_ip_address
 }
 
-output "private_dns_zone_name" {
-  description = "Private Cloud DNS managed zone name."
-  value       = module.edge.dns_zone_name
-}
-
 output "application_hostname" {
-  description = "Configured application hostname."
+  description = "Configured DuckDNS application hostname."
   value       = module.edge.application_hostname
 }
 
