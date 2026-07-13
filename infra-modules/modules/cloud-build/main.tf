@@ -80,7 +80,7 @@ resource "google_cloudbuild_trigger" "feature" {
 resource "google_cloudbuild_trigger" "main" {
   project         = var.project_id
   name            = "cloudkite-main-deploy"
-  description     = "Build, push, and promote main-branch images through GitOps"
+  description     = "Build, push, and deploy main-branch images through GitOps"
   filename        = "cloudbuild.yaml"
   service_account = local.service_account
 
