@@ -80,7 +80,7 @@ resource "google_cloudbuild_trigger" "feature" {
 resource "google_cloudbuild_trigger" "main" {
   project         = var.project_id
   name            = "cloudkite-main-deploy"
-  description     = "Build, push, and deploy the main branch"
+  description     = "Build, push, and deploy main-branch images through GitOps"
   filename        = "cloudbuild.yaml"
   service_account = local.service_account
 
@@ -91,6 +91,10 @@ resource "google_cloudbuild_trigger" "main" {
     push {
       branch = "^main$"
     }
+  }
+
+  approval_config {
+    approval_required = true
   }
 
   substitutions = {
