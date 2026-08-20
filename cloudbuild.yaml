@@ -37,14 +37,14 @@ steps:
     args:
       - validate
 
-  - id: terraform-plan
+  - id: terraform-destroy-plan
     name: hashicorp/terraform:${_TERRAFORM_VERSION}
     dir: infra-modules
     entrypoint: sh
     args:
       - -ceu
       - |
-        terraform plan \
+        terraform plan -destroy \
           -input=false \
           -lock-timeout=5m \
           -out=/workspace/cloudkite.tfplan \
@@ -61,4 +61,4 @@ steps:
           echo "Destroy skipped; plan completed for ${BRANCH_NAME}"
           exit 0
         fi
-        terraform destroy -input=false -auto-approve /workspace/cloudkite.tfplan
+        terraform apply -input=false -auto-approve /workspace/cloudkite.tfplan
