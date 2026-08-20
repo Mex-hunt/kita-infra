@@ -50,7 +50,7 @@ steps:
           -out=/workspace/cloudkite.tfplan \
           -var="project_id=${PROJECT_ID}"
 
-  - id: terraform-apply
+  - id: terraform-destroy
     name: hashicorp/terraform:${_TERRAFORM_VERSION}
     dir: infra-modules
     entrypoint: sh
@@ -58,8 +58,7 @@ steps:
       - -ceu
       - |
         if [ "${_APPLY}" != "true" ] || { [ "${BRANCH_NAME}" != "main" ] && [ "${BRANCH_NAME}" != "master" ]; }; then
-          echo "Apply skipped; plan completed for ${BRANCH_NAME}"
+          echo "Destroy skipped; plan completed for ${BRANCH_NAME}"
           exit 0
         fi
-        terraform apply -input=false -auto-approve /workspace/cloudkite.tfplan
-
+        terraform destroy -input=false -auto-approve /workspace/cloudkite.tfplan
