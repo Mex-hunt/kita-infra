@@ -78,16 +78,18 @@ resource "google_sql_database_instance" "postgres" {
 }
 
 resource "google_sql_database" "application" {
-  project  = var.project_id
-  name     = var.database_name
-  instance = google_sql_database_instance.postgres.name
+  project         = var.project_id
+  name            = var.database_name
+  instance        = google_sql_database_instance.postgres.name
+  deletion_policy = "ABANDON"
 }
 
 resource "google_sql_user" "application" {
-  project  = var.project_id
-  name     = var.database_user
-  instance = google_sql_database_instance.postgres.name
-  password = random_password.database.result
+  project         = var.project_id
+  name            = var.database_user
+  instance        = google_sql_database_instance.postgres.name
+  password        = random_password.database.result
+  deletion_policy = "ABANDON"
 }
 
 resource "google_secret_manager_secret" "database_credentials" {

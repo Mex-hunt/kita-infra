@@ -42,7 +42,7 @@ cloud_sql_edition                   = "ENTERPRISE"
 cloud_sql_availability_type         = "ZONAL"
 cloud_sql_disk_size_gb              = 10
 cloud_sql_disk_type                 = "PD_HDD"
-cloud_sql_deletion_protection       = true
+cloud_sql_deletion_protection       = false
 private_service_range_prefix_length = 16
 database_credentials_secret_id      = "cloudkite-database-credentials"
 

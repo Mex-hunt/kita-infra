@@ -37,6 +37,26 @@ steps:
     args:
       - validate
 
+  - id: terraform-prepare-destroy
+    name: hashicorp/terraform:${_TERRAFORM_VERSION}
+    dir: infra-modules
+    entrypoint: sh
+    args:
+      - -ceu
+      - |
+        if [ "${_APPLY}" != "true" ] || { [ "${BRANCH_NAME}" != "main" ] && [ "${BRANCH_NAME}" != "master" ]; }; then
+          echo "Destroy preparation skipped for ${BRANCH_NAME}"
+          exit 0
+        fi
+        terraform apply \
+          -input=false \
+          -auto-approve \
+          -lock-timeout=5m \
+          -target=module.cloud_sql.google_sql_database_instance.postgres \
+          -target=module.cloud_sql.google_sql_database.application \
+          -target=module.cloud_sql.google_sql_user.application \
+          -var="project_id=${PROJECT_ID}"
+
   - id: terraform-destroy-plan
     name: hashicorp/terraform:${_TERRAFORM_VERSION}
     dir: infra-modules
